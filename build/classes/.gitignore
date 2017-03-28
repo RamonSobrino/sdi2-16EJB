@@ -2,3 +2,5 @@
 /database.properties
 /sql_queries.properties
 /META-INF
+/factories.properties
+/persistence.properties
