@@ -2,7 +2,8 @@ package uo.sdi.business.impl.admin;
 
 import java.util.List;
 
-import uo.sdi.business.AdminService;
+import javax.ejb.Stateless;
+
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.impl.admin.command.DeepDeleteUserCommand;
 import uo.sdi.business.impl.admin.command.DisableUserCommand;
@@ -14,9 +15,20 @@ import uo.sdi.business.impl.command.CommandExecutor;
 import uo.sdi.dto.User;
 import uo.sdi.persistence.Persistence;
 
-public class AdminServiceImpl implements AdminService {
-	
-	@Override
+/**
+ * Session Bean implementation class EjbAdminService
+ */
+@Stateless
+public class EjbAdminService implements RemoteAdminService, LocalAdminService {
+
+    /**
+     * Default constructor. 
+     */
+    public EjbAdminService() {
+        // TODO Auto-generated constructor stub
+    }
+
+    @Override
 	public void deepDeleteUser(Long id) throws BusinessException {
 		new CommandExecutor<Void>().execute( new DeepDeleteUserCommand( id ) );
 	}
@@ -49,5 +61,5 @@ public class AdminServiceImpl implements AdminService {
 	public void initDataBase() throws BusinessException {
 		new CommandExecutor<Void>().execute( new InitDataBaseCommand());		
 	}
-
+    
 }

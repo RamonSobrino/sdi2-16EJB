@@ -1,10 +1,14 @@
 package uo.sdi.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import alb.util.date.DateUtil;
 
-public class Task implements Comparable<Task>{
+public class Task implements Comparable<Task>, Serializable {
+
+	private static final long serialVersionUID = 7840461741626423043L;
+
 	private Long id;
 
 	private String title;
@@ -88,32 +92,28 @@ public class Task implements Comparable<Task>{
 		return this;
 	}
 
-	public boolean isLate(){
-		if(planned != null){
-			//return planned.before(new Date());
-			return DateUtil.diffDays(new Date(), this.planned)>0;
-		}else{
+	public boolean isLate() {
+		if (planned != null) {
+			// return planned.before(new Date());
+			return DateUtil.diffDays(new Date(), this.planned) > 0;
+		} else {
 			return false;
 		}
 	}
-	
-	public boolean isFinish(){
-		if(finished!=null){
+
+	public boolean isFinish() {
+		if (finished != null) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
 
 	@Override
 	public String toString() {
-		return "TaskDto [id=" + id 
-				+ ", title=" + title 
-				+ ", comments=" + comments 
-				+ ", created=" + created
-				+ ", planned=" + planned 
-				+ ", finished=" + finished 
-				+ ", categoryId=" + categoryId 
+		return "TaskDto [id=" + id + ", title=" + title + ", comments="
+				+ comments + ", created=" + created + ", planned=" + planned
+				+ ", finished=" + finished + ", categoryId=" + categoryId
 				+ ", userId=" + userId + "]";
 	}
 
@@ -121,10 +121,13 @@ public class Task implements Comparable<Task>{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((categoryId == null) ? 0 : categoryId.hashCode());
-		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
+		result = prime * result
+				+ ((categoryId == null) ? 0 : categoryId.hashCode());
+		result = prime * result
+				+ ((comments == null) ? 0 : comments.hashCode());
 		result = prime * result + ((created == null) ? 0 : created.hashCode());
-		result = prime * result + ((finished == null) ? 0 : finished.hashCode());
+		result = prime * result
+				+ ((finished == null) ? 0 : finished.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((planned == null) ? 0 : planned.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
@@ -186,14 +189,14 @@ public class Task implements Comparable<Task>{
 
 	@Override
 	public int compareTo(Task o) {
-		if(this.planned == null){
-			if(o.getPlanned() == null){
+		if (this.planned == null) {
+			if (o.getPlanned() == null) {
 				return 0;
-			}else{
+			} else {
 				return -1;
 			}
-		}else{
-			if(o.getPlanned() == null){
+		} else {
+			if (o.getPlanned() == null) {
 				return 1;
 			}
 		}

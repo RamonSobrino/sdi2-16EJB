@@ -1,6 +1,10 @@
 package uo.sdi.dto;
 
-public class Category {
+import java.io.Serializable;
+
+public class Category implements Serializable {
+	
+	private static final long serialVersionUID = 5568866959974234572L;
 	private Long id;
 	private String name;
 	private Long userId; 

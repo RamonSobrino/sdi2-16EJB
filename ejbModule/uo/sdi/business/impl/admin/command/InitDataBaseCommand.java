@@ -3,7 +3,6 @@ package uo.sdi.business.impl.admin.command;
 import java.util.List;
 
 import uo.sdi.business.AdminService;
-import uo.sdi.business.Services;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.UserService;
 import uo.sdi.business.exception.BusinessException;
@@ -11,6 +10,7 @@ import uo.sdi.business.impl.command.Command;
 import uo.sdi.dto.Category;
 import uo.sdi.dto.Task;
 import uo.sdi.dto.User;
+import uo.sdi.infrastructure.Factories;
 import uo.sdi.persistence.Persistence;
 import uo.sdi.persistence.UserDao;
 import alb.util.date.DateUtil;
@@ -22,7 +22,7 @@ public class InitDataBaseCommand implements Command<Void> {
 		UserDao uDao = Persistence.getUserDao();
 		//TaskDao tDao = Persistence.getTaskDao();
 		//CategoryDao cDao = Persistence.getCategoryDao();
-		AdminService adminServices = Services.getAdminService();
+		AdminService adminServices = Factories.services.getAdminService();
 		
 		List<User> listaAnti = uDao.findAll();
 		
@@ -32,8 +32,8 @@ public class InitDataBaseCommand implements Command<Void> {
 			adminServices.deepDeleteUser(us.getId());
 		}
 		
-		UserService userServices = Services.getUserService();
-		TaskService taskServices = Services.getTaskService();
+		UserService userServices = Factories.services.getUserService();
+		TaskService taskServices = Factories.services.getTaskService();
 		
 		
 		

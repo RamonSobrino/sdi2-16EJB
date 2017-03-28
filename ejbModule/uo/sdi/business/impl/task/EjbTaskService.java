@@ -2,7 +2,8 @@ package uo.sdi.business.impl.task;
 
 import java.util.List;
 
-import uo.sdi.business.TaskService;
+import javax.ejb.Stateless;
+
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.impl.command.Command;
 import uo.sdi.business.impl.command.CommandExecutor;
@@ -17,9 +18,20 @@ import uo.sdi.dto.Category;
 import uo.sdi.dto.Task;
 import uo.sdi.persistence.Persistence;
 
-public class TaskServiceImpl implements TaskService {
+/**
+ * Session Bean implementation class EjbTaskService
+ */
+@Stateless
+public class EjbTaskService implements RemoteTaskService, LocalTaskService {
 
-	@Override
+    /**
+     * Default constructor. 
+     */
+    public EjbTaskService() {
+        // TODO Auto-generated constructor stub
+    }
+    
+    @Override
 	public Long createCategory(Category category) throws BusinessException {
 		return new CommandExecutor<Long>().execute( 
 			new CreateCategoryCommand( category )

@@ -1,5 +1,11 @@
 package uo.sdi.business;
 
-public class ServicesFactory {
+public interface ServicesFactory {
+	public AdminService getAdminService();
 
+	public UserService getUserService();
+
+	public TaskService getTaskService();
+
+	public LoginService getLoginService();
 }

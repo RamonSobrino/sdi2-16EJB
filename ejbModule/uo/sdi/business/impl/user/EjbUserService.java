@@ -1,6 +1,7 @@
 package uo.sdi.business.impl.user;
 
-import uo.sdi.business.UserService;
+import javax.ejb.Stateless;
+
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.impl.command.CommandExecutor;
 import uo.sdi.business.impl.user.command.AddUserCommand;
@@ -10,9 +11,20 @@ import uo.sdi.business.impl.user.command.RegisterUserCommand;
 import uo.sdi.business.impl.user.command.UpdateUserDetailsCommand;
 import uo.sdi.dto.User;
 
-public class UserServiceImpl implements UserService {
+/**
+ * Session Bean implementation class EjbUserService
+ */
+@Stateless
+public class EjbUserService implements RemoteUserService, LocalUserService {
 
-	@Override
+    /**
+     * Default constructor. 
+     */
+    public EjbUserService() {
+        // TODO Auto-generated constructor stub
+    }
+    
+    @Override
 	public Long registerUser(User user) throws BusinessException {
 		return new CommandExecutor<Long>().execute( 
 				new RegisterUserCommand( user ) 
@@ -46,9 +58,5 @@ public class UserServiceImpl implements UserService {
 				new AddUserCommand( user ) 
 		);
 	}
-
-	
-	
-	
 
 }

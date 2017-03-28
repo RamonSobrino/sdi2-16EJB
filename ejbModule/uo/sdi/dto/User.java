@@ -1,5 +1,7 @@
 package uo.sdi.dto;
 
+import java.io.Serializable;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 import uo.sdi.business.exception.BusinessException;
@@ -11,7 +13,10 @@ import uo.sdi.dto.types.UserStatus;
  * 
  * @author alb
  */
-public class User {
+public class User implements Serializable {
+
+	private static final long serialVersionUID = -4317542179579794228L;
+
 	private Long id;
 
 	private String login;
@@ -19,7 +24,7 @@ public class User {
 	private String password;
 	private Boolean isAdmin = false;
 	private UserStatus status = UserStatus.ENABLED;
-	
+
 	public User setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
 		return this;
@@ -60,36 +65,38 @@ public class User {
 		this.password = password;
 		return this;
 	}
+
 	/**
 	 * Asigna la contraseña al usuario y la hashea para guardarla
+	 * 
 	 * @param newPass
-	 * @throws BusinessException si no cumple las condiciones de contraseña valida
+	 * @throws BusinessException
+	 *             si no cumple las condiciones de contraseña valida
 	 */
 	public void setAndHashPassword(String newPass) throws BusinessException {
 		UserCheck.minPasswordLength(newPass);
-		setPassword(BCrypt.hashpw(newPass, BCrypt.gensalt()));	
-	}	
+		setPassword(BCrypt.hashpw(newPass, BCrypt.gensalt()));
+	}
 
 	public Boolean getIsAdmin() {
 		return isAdmin;
 	}
-	
+
 	/**
 	 * Comprueba que la contraseña pertenece al usuario
-	 * @param toCheck contraseña a comprobar
+	 * 
+	 * @param toCheck
+	 *            contraseña a comprobar
 	 * @return si la contraseña es correcta para el usuario
 	 */
-	public boolean checkPassword(String toCheck){
+	public boolean checkPassword(String toCheck) {
 		return BCrypt.checkpw(toCheck, this.password);
 	}
 
 	@Override
 	public String toString() {
-		return "UserDto [id=" + id 
-				+ ", login=" + login 
-				+ ", email=" + email 
-				+ ", password=" + password 
-				+ ", isAdmin=" + isAdmin + "]";
+		return "UserDto [id=" + id + ", login=" + login + ", email=" + email
+				+ ", password=" + password + ", isAdmin=" + isAdmin + "]";
 	}
 
 	public UserStatus getStatus() {
@@ -100,8 +107,8 @@ public class User {
 		this.status = status;
 		return this;
 	}
-	
-	public boolean isEnabled(){
+
+	public boolean isEnabled() {
 		return status.equals(UserStatus.ENABLED);
 	}
 
@@ -113,7 +120,8 @@ public class User {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((isAdmin == null) ? 0 : isAdmin.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result
+				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
@@ -157,5 +165,4 @@ public class User {
 		return true;
 	}
 
-	
 }
