@@ -3,7 +3,6 @@ package uo.sdi.business.impl.login;
 import javax.ejb.Stateless;
 
 import uo.sdi.business.exception.BusinessException;
-import uo.sdi.business.impl.command.CommandExecutor;
 import uo.sdi.business.impl.login.command.LoginCommand;
 import uo.sdi.dto.User;
 

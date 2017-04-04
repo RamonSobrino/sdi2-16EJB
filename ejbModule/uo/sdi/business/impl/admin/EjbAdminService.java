@@ -11,8 +11,6 @@ import uo.sdi.business.impl.admin.command.DisableUserCommand;
 import uo.sdi.business.impl.admin.command.EnableUserCommand;
 import uo.sdi.business.impl.admin.command.FindAllUsersCommand;
 import uo.sdi.business.impl.admin.command.InitDataBaseCommand;
-import uo.sdi.business.impl.command.Command;
-import uo.sdi.business.impl.command.CommandExecutor;
 import uo.sdi.dto.User;
 import uo.sdi.persistence.Persistence;
 
@@ -20,48 +18,44 @@ import uo.sdi.persistence.Persistence;
  * Session Bean implementation class EjbAdminService
  */
 @Stateless
-@WebService(name="adminService")
+@WebService(name = "adminService")
 public class EjbAdminService implements RemoteAdminService, LocalAdminService {
 
-    /**
-     * Default constructor. 
-     */
-    public EjbAdminService() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public EjbAdminService() {
+		// TODO Auto-generated constructor stub
+	}
 
-    @Override
+	@Override
 	public void deepDeleteUser(Long id) throws BusinessException {
-		new CommandExecutor<Void>().execute( new DeepDeleteUserCommand( id ) );
+		new DeepDeleteUserCommand(id).execute();
 	}
 
 	@Override
 	public void disableUser(Long id) throws BusinessException {
-		new CommandExecutor<Void>().execute( new DisableUserCommand( id ) );
+		new DisableUserCommand(id).execute();
 	}
 
 	@Override
 	public void enableUser(Long id) throws BusinessException {
-		new CommandExecutor<Void>().execute( new EnableUserCommand( id ) );
+		new EnableUserCommand(id).execute();
 	}
 
 	@Override
 	public List<User> findAllUsers() throws BusinessException {
-		return new CommandExecutor<List<User>>().execute(new FindAllUsersCommand());
+		return new FindAllUsersCommand().execute();
 	}
 
 	@Override
 	public User findUserById(final Long id) throws BusinessException {
-		return new CommandExecutor<User>().execute( new Command<User>() {
-			@Override public User execute() throws BusinessException {
-				return Persistence.getUserDao().findById(id);
-			}
-		});
+		return Persistence.getUserDao().findById(id);
 	}
 
 	@Override
 	public void initDataBase() throws BusinessException {
-		new CommandExecutor<Void>().execute( new InitDataBaseCommand());		
+		new InitDataBaseCommand().execute();
 	}
-    
+
 }
