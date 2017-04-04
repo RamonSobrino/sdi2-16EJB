@@ -22,7 +22,7 @@ public class EjbLoginService implements RemoteLoginService, LocalLoginService {
     
     @Override
 	public User doLogin(String login, String password) throws BusinessException {
-		return new CommandExecutor<User>().execute(new LoginCommand(login, password)); 
+		return new LoginCommand(login, password).execute(); 
 	}
 
 }

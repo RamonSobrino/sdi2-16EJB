@@ -64,6 +64,10 @@ public class JdbcHelper {
 		close(ps, con);
 	}
 
+	public void close(ResultSet rs) {
+		if (rs != null) {try{ rs.close(); } catch (Exception ex){}};
+	}
+	
 	public void close(PreparedStatement ps, Connection con) {
 		if (ps != null) {try{ ps.close(); } catch (Exception ex){}};
 		if (con != null) {try{ con.close(); } catch (Exception ex){}};
