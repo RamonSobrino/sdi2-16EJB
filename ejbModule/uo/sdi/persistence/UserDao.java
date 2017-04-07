@@ -10,5 +10,10 @@ public interface UserDao extends GenericDao<User, Long>{
 	
 	void deleteAllUsers();
 	
+	Long numTareasCompletadas(User u);
+	Long numTareasRetrasadas(User u);
+	Long numTareasPlanificadas(User u);
+	Long numTareasSinPlanificadas(User u);
+
 	
 }

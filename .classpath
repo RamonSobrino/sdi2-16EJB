@@ -13,5 +13,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container/sdi2-16Web"/>
+	<classpathentry kind="lib" path="lib/albUtilJ7.jar"/>
+	<classpathentry kind="lib" path="lib/jbcrypt.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

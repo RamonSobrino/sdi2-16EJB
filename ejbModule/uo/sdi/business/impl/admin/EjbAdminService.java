@@ -11,7 +11,9 @@ import uo.sdi.business.impl.admin.command.DisableUserCommand;
 import uo.sdi.business.impl.admin.command.EnableUserCommand;
 import uo.sdi.business.impl.admin.command.FindAllUsersCommand;
 import uo.sdi.business.impl.admin.command.InitDataBaseCommand;
+import uo.sdi.business.impl.admin.command.ListDataCommand;
 import uo.sdi.dto.User;
+import uo.sdi.dto.UserData;
 import uo.sdi.persistence.Persistence;
 
 /**
@@ -56,6 +58,11 @@ public class EjbAdminService implements RemoteAdminService, LocalAdminService {
 	@Override
 	public void initDataBase() throws BusinessException {
 		new InitDataBaseCommand().execute();
+	}
+
+	@Override
+	public List<UserData> listData() throws BusinessException {
+		return new ListDataCommand().execute();
 	}
 
 }
