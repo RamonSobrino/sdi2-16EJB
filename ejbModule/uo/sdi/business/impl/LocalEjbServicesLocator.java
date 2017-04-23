@@ -13,16 +13,16 @@ import uo.sdi.business.UserService;
 public class LocalEjbServicesLocator implements ServicesFactory {
 
 	private static final String ADMIN_SERVICE_JNDI_KEY = "java:global/"
-			+ "sdi2-16TODO/" + "sdi2-16EJB/" + "EjbAdminService!"
+			+ "sdi2-16/" + "sdi2-16EJB/" + "EjbAdminService!"
 			+ "uo.sdi.business.impl.admin.LocalAdminService";
 	private static final String USER_SERVICE_JNDI_KEY = "java:global/"
-			+ "sdi2-16TODO/" + "sdi2-16EJB/" + "EjbUserService!"
+			+ "sdi2-16/" + "sdi2-16EJB/" + "EjbUserService!"
 			+ "uo.sdi.business.impl.user.LocalUserService";
 	private static final String TASK_SERVICE_JNDI_KEY = "java:global/"
-			+ "sdi2-16TODO/" + "sdi2-16EJB/" + "EjbTaskService!"
+			+ "sdi2-16/" + "sdi2-16EJB/" + "EjbTaskService!"
 			+ "uo.sdi.business.impl.task.LocalTaskService";
 	private static final String LOGIN_SERVICE_JNDI_KEY = "java:global/"
-			+ "sdi2-16TODO/" + "sdi2-16EJB/" + "EjbLoginService!"
+			+ "sdi2-16/" + "sdi2-16EJB/" + "EjbLoginService!"
 			+ "uo.sdi.business.impl.login.LocalLoginService";
 
 	@Override

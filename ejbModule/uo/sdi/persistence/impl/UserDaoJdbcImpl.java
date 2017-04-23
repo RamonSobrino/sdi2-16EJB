@@ -10,6 +10,8 @@ import uo.sdi.persistence.UserDao;
 import uo.sdi.persistence.util.JdbcTemplate;
 import uo.sdi.persistence.util.RowMapper;
 
+import uo.sdi.persistence.impl.TaskDaoJdbcImpl;
+
 public class UserDaoJdbcImpl implements UserDao {
 
 	public class UserMapper implements RowMapper<User> {
@@ -99,22 +101,22 @@ public class UserDaoJdbcImpl implements UserDao {
 
 	@Override
 	public Long numTareasCompletadas(User u) {
-		return (long) jdbcTemplate.execute("NUMBER_TASKS_FINISHED_BY_USER", u.getId());
+		return (long) jdbcTemplate.executeQuery("NUMBER_TASKS_FINISHED_BY_USER", u.getId());
 	}
 
 	@Override
 	public Long numTareasRetrasadas(User u) {
-		return (long) jdbcTemplate.execute("NUMBER_TASKS_UNFINISHED_BY_USER", u.getId());
+		return  (long) jdbcTemplate.executeQuery("NUMBER_TASKS_UNFINISHED_BY_USER", u.getId());
 	}
 
 	@Override
 	public Long numTareasPlanificadas(User u) {
-		return (long) jdbcTemplate.execute("NUMBER_TASKS_PLANNED_BY_USER", u.getId());
+		return (long) jdbcTemplate.executeQuery("NUMBER_TASKS_PLANNED_BY_USER", u.getId());
 	}
 
 	@Override
 	public Long numTareasSinPlanificadas(User u) {
-		return (long) jdbcTemplate.execute("NUMBER_TASKS_UNPLANNED_BY_USER", u.getId());
+		return (long) jdbcTemplate.executeQuery("NUMBER_TASKS_UNPLANNED_BY_USER", u.getId());
 	}
 
 }

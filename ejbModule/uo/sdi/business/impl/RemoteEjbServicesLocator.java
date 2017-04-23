@@ -12,16 +12,16 @@ import uo.sdi.business.UserService;
 
 public class RemoteEjbServicesLocator implements ServicesFactory {
 
-	private static final String ADMIN_SERVICE_JNDI_KEY = "sdi2-16TODO/"
+	private static final String ADMIN_SERVICE_JNDI_KEY = "sdi2-16/"
 			+ "sdi2-16EJB/" + "EjbAdminService!"
 			+ "uo.sdi.business.impl.admin.RemoteAdminService";
-	private static final String USER_SERVICE_JNDI_KEY = "sdi2-16TODO/"
+	private static final String USER_SERVICE_JNDI_KEY = "sdi2-16/"
 			+ "sdi2-16EJB/" + "EjbUserService!"
 			+ "uo.sdi.business.impl.user.RemoteUserService";
-	private static final String TASK_SERVICE_JNDI_KEY = "sdi2-16TODO/"
+	private static final String TASK_SERVICE_JNDI_KEY = "sdi2-16/"
 			+ "sdi2-16EJB/" + "EjbTaskService!"
 			+ "uo.sdi.business.impl.task.RemoteTaskService";
-	private static final String LOGIN_SERVICE_JNDI_KEY = "sdi2-16TODO/"
+	private static final String LOGIN_SERVICE_JNDI_KEY = "sdi2-16/"
 			+ "sdi2-16EJB/" + "EjbLoginService!"
 			+ "uo.sdi.business.impl.login.RemoteLoginService";
 

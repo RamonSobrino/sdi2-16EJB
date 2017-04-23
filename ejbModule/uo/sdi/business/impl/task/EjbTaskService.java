@@ -127,4 +127,5 @@ public class EjbTaskService implements RemoteTaskService, LocalTaskService {
 		return Persistence.getTaskDao().findUnfinishedTasksByUserId(userId);
 	}
 
+	
 }

@@ -1,7 +1,14 @@
 package uo.sdi.dto;
 
-public class UserData {
+import java.io.Serializable;
+
+public class UserData implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 413136696352377433L;
+
 	private Long id;
 
 	private String login;

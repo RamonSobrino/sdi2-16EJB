@@ -1,8 +1,12 @@
 package uo.sdi.infrastructure;
 
+import uo.sdi.infrastructure.FactoriesHelper;
+
 import uo.sdi.business.ServicesFactory;
-import uo.sdi.business.impl.LocalEjbServicesLocator;
 
 public class Factories {
-	public static ServicesFactory services = new LocalEjbServicesLocator();
+	private static String CONFIG_FILE = "/factories.properties";
+	
+	public static ServicesFactory services = (ServicesFactory)
+			FactoriesHelper.createFactory(CONFIG_FILE, "SERVICES_FACTORY");
 }
