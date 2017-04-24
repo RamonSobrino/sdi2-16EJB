@@ -3,8 +3,12 @@ package uo.sdi.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import alb.util.date.DateUtil;
 
+@XmlRootElement(name = "task")
 public class Task implements Comparable<Task>, Serializable {
 
 	private static final long serialVersionUID = 7840461741626423043L;
@@ -20,6 +24,7 @@ public class Task implements Comparable<Task>, Serializable {
 	private Long categoryId;
 	private Long userId;
 
+	@XmlElement
 	public Long getId() {
 		return id;
 	}
@@ -29,6 +34,7 @@ public class Task implements Comparable<Task>, Serializable {
 		return this;
 	}
 
+	@XmlElement
 	public String getTitle() {
 		return title;
 	}
@@ -38,6 +44,7 @@ public class Task implements Comparable<Task>, Serializable {
 		return this;
 	}
 
+	@XmlElement
 	public String getComments() {
 		return comments;
 	}
@@ -47,6 +54,7 @@ public class Task implements Comparable<Task>, Serializable {
 		return this;
 	}
 
+	@XmlElement
 	public Date getCreated() {
 		return created;
 	}
@@ -56,6 +64,7 @@ public class Task implements Comparable<Task>, Serializable {
 		return this;
 	}
 
+	@XmlElement
 	public Date getPlanned() {
 		return planned;
 	}
@@ -65,6 +74,7 @@ public class Task implements Comparable<Task>, Serializable {
 		return this;
 	}
 
+	@XmlElement
 	public Date getFinished() {
 		return finished;
 	}
@@ -74,6 +84,7 @@ public class Task implements Comparable<Task>, Serializable {
 		return this;
 	}
 
+	@XmlElement
 	public Long getCategoryId() {
 		return categoryId;
 	}
@@ -83,6 +94,7 @@ public class Task implements Comparable<Task>, Serializable {
 		return this;
 	}
 
+	@XmlElement
 	public Long getUserId() {
 		return userId;
 	}

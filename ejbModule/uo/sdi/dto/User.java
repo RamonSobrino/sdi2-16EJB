@@ -2,6 +2,9 @@ package uo.sdi.dto;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 import uo.sdi.business.exception.BusinessException;
@@ -13,6 +16,7 @@ import uo.sdi.dto.types.UserStatus;
  * 
  * @author alb
  */
+@XmlRootElement(name = "user")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = -4317542179579794228L;
@@ -30,6 +34,7 @@ public class User implements Serializable {
 		return this;
 	}
 
+	@XmlElement
 	public Long getId() {
 		return id;
 	}
@@ -39,6 +44,7 @@ public class User implements Serializable {
 		return this;
 	}
 
+	@XmlElement
 	public String getLogin() {
 		return login;
 	}
@@ -48,6 +54,7 @@ public class User implements Serializable {
 		return this;
 	}
 
+	@XmlElement
 	public String getEmail() {
 		return email;
 	}
@@ -57,6 +64,7 @@ public class User implements Serializable {
 		return this;
 	}
 
+	@XmlElement
 	public String getPassword() {
 		return password;
 	}
@@ -78,6 +86,7 @@ public class User implements Serializable {
 		setPassword(BCrypt.hashpw(newPass, BCrypt.gensalt()));
 	}
 
+	@XmlElement
 	public Boolean getIsAdmin() {
 		return isAdmin;
 	}
@@ -99,6 +108,7 @@ public class User implements Serializable {
 				+ ", password=" + password + ", isAdmin=" + isAdmin + "]";
 	}
 
+	@XmlElement
 	public UserStatus getStatus() {
 		return status;
 	}
