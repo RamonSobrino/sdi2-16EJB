@@ -1,6 +1,7 @@
 package uo.sdi.business.impl.login;
 
 import javax.ejb.Stateless;
+import javax.jws.WebService;
 
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.impl.login.command.LoginCommand;
@@ -10,6 +11,7 @@ import uo.sdi.dto.User;
  * Session Bean implementation class EjbLoginService
  */
 @Stateless
+@WebService(name="loginService")
 public class EjbLoginService implements RemoteLoginService, LocalLoginService {
 
     /**

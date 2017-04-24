@@ -1,6 +1,7 @@
 package uo.sdi.business.impl.user;
 
 import javax.ejb.Stateless;
+import javax.jws.WebService;
 
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.impl.user.command.AddUserCommand;
@@ -14,6 +15,7 @@ import uo.sdi.dto.User;
  * Session Bean implementation class EjbUserService
  */
 @Stateless
+@WebService(name="userService")
 public class EjbUserService implements RemoteUserService, LocalUserService {
 
 	/**

@@ -3,6 +3,7 @@ package uo.sdi.business.impl.task;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.jws.WebService;
 
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.impl.task.command.CreateCategoryCommand;
@@ -20,6 +21,7 @@ import uo.sdi.persistence.Persistence;
  * Session Bean implementation class EjbTaskService
  */
 @Stateless
+@WebService(name="taskService")
 public class EjbTaskService implements RemoteTaskService, LocalTaskService {
 
 	/**
