@@ -10,10 +10,12 @@ import javax.jms.MapMessage;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
+import uo.sdi.business.LoginService;
 import uo.sdi.business.MessageResponderService;
 import uo.sdi.business.TaskService;
 import uo.sdi.business.UserService;
 import uo.sdi.business.exception.BusinessException;
+import uo.sdi.business.impl.login.LocalLoginService;
 import uo.sdi.business.impl.responder.EjbMessageResponderService;
 import uo.sdi.business.impl.task.LocalTaskService;
 import uo.sdi.business.impl.user.LocalUserService;
@@ -33,10 +35,10 @@ public class TaskManagerListener implements MessageListener {
 	@EJB(beanInterface = LocalTaskService.class)
 	private TaskService taskService;
 	
-	@EJB(beanInterface = LocalUserService.class)
-	private UserService userService;
+	@EJB(beanInterface = LocalLoginService.class)
+	private LoginService loginService;
 	
-	@EJB(beanInterface = EjbMessageResponderService.class)
+	@EJB
 	private MessageResponderService responder;
 	
 	@Override
@@ -72,7 +74,7 @@ public class TaskManagerListener implements MessageListener {
 		MapMessage msg = (MapMessage) m;
 		if(!doComprobarUser(msg))
 		{
-			//Mandar mensaje de usuario incorrecto
+			responder.sendError(msg, "Usuario incorrecto");
 		}
 		String cmd = msg.getString("command");
 		switch(cmd)
@@ -97,21 +99,25 @@ public class TaskManagerListener implements MessageListener {
 		String user = msg.getString("user");
 		String password = msg.getString("password");
 		
-		this.user = userService.findLoggableUser(user, password);
+		this.user = loginService.doLogin(user, password);
 
 		return this.user!=null;
 	}
 
 	private void doNuevaTarea(MapMessage msg) 
 			throws JMSException, BusinessException {
-		
+		Task tarea = new Task();
+
 		String title = msg.getString("title");
-		Long idCat = Long.valueOf(msg.getString("idCat"));
+		
+		if(!msg.getString("idCat").equals("null"))
+		{
+			Long idCat = Long.valueOf(msg.getString("idCat"));
+			tarea.setCategoryId(idCat);
+		}	
 		String comment = msg.getString("comment");
 		
-		Task tarea = new Task();
 		tarea.setTitle(title);
-		tarea.setCategoryId(idCat);
 		tarea.setComments(comment);
 		tarea.setUserId(this.user.getId());
 				

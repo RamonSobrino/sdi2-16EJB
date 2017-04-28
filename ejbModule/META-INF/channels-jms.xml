@@ -3,7 +3,7 @@
 	<hornetq-server>
 		<jms-destinations>
 			<jms-queue name="TaskManager">
-				<entry name="jms/queue/TaskManager" />
+				<entry name="queue/TaskManager" />
 				<entry name="java:jboss/exported/jms/queue/TaskManager" />
 				<durable>true</durable>
 			</jms-queue>

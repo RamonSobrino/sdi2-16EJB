@@ -74,10 +74,9 @@ public class EjbMessageResponderService implements MessageResponderService{
 		MessageProducer sender = session.createProducer(destino);
 		
 		ObjectMessage mensaje = 
-				this.session.createObjectMessage((Serializable) lista);
-		
+				this.session.createObjectMessage();
+		mensaje.setObject((Serializable)lista);
 		sender.send(mensaje);
-
 	}
 
 }
