@@ -17,6 +17,9 @@ import javax.jms.ObjectMessage;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
+import org.jboss.dmr.JSONParser;
+
+import alb.util.console.Console;
 import uo.sdi.business.MessageResponderService;
 import uo.sdi.dto.Task;
 
@@ -25,41 +28,41 @@ public class EjbMessageResponderService implements MessageResponderService{
 
 	@Resource(mappedName = "java:/ConnectionFactory")
 	private ConnectionFactory factory;
-	
+
 	@Resource private SessionContext ctx;
 	private Destination destino;
-	
-	
+
+
 	private Connection con  ;
 	private Session session;
-	
+
 	@Override
 	public void sendError(Message msg, String tipoError) throws JMSException {
 		this.destino =  msg.getJMSReplyTo();
-		
-		con = factory.createConnection();
+
+		con = factory.createConnection("sdi", "password");
 		this.session = con.createSession(false,
 				Session.AUTO_ACKNOWLEDGE);
 		MessageProducer sender = session.createProducer(destino);
-		
+
 		TextMessage mensaje = this.session.createTextMessage();
 		mensaje.setText("Un Error se ha producido "+ tipoError);
-		
+
 		sender.send(mensaje);
 	}
 
 	@Override
 	public void sendOk(MapMessage msg) throws JMSException {
 		this.destino =  msg.getJMSReplyTo();
-		
-		con = factory.createConnection();
+
+		con = factory.createConnection("sdi", "password");
 		this.session = con.createSession(false,
 				Session.AUTO_ACKNOWLEDGE);
 		MessageProducer sender = session.createProducer(destino);
-		
+
 		TextMessage mensaje = this.session.createTextMessage();
 		mensaje.setText("Todo ha ido bien");
-		
+
 		sender.send(mensaje);
 
 	}
@@ -67,15 +70,15 @@ public class EjbMessageResponderService implements MessageResponderService{
 	@Override
 	public void sendList(MapMessage msg, List<Task> lista) throws JMSException {
 		this.destino =  msg.getJMSReplyTo();
-		
-		con = factory.createConnection();
+
+		con = factory.createConnection("sdi", "password");
 		this.session = con.createSession(false,
 				Session.AUTO_ACKNOWLEDGE);
 		MessageProducer sender = session.createProducer(destino);
-		
+
 		ObjectMessage mensaje = 
-				this.session.createObjectMessage();
-		mensaje.setObject((Serializable)lista);
+				this.session.createObjectMessage((Serializable)lista);
+	
 		sender.send(mensaje);
 	}
 

@@ -8,7 +8,6 @@ import uo.sdi.business.impl.command.Command;
 import uo.sdi.dto.User;
 import uo.sdi.dto.UserData;
 import uo.sdi.persistence.Persistence;
-import uo.sdi.persistence.UserDao;
 
 public class ListDataCommand implements Command<List<UserData>> {
 
