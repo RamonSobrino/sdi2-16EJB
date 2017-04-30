@@ -75,6 +75,7 @@ public class TaskManagerListener implements MessageListener {
 		if(!doComprobarUser(msg))
 		{
 			responder.sendError(msg, "Usuario incorrecto");
+			return;
 		}
 		String cmd = msg.getString("command");
 		switch(cmd)
@@ -100,8 +101,13 @@ public class TaskManagerListener implements MessageListener {
 		String password = msg.getString("password");
 		
 		this.user = loginService.doLogin(user, password);
-
-		return this.user!=null;
+		
+		if(this.user==null)
+		{
+			return false;
+		}else{
+			return true;
+		}
 	}
 
 	private void doNuevaTarea(MapMessage msg) 

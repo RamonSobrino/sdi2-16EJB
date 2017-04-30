@@ -7,6 +7,11 @@
 				<entry name="java:jboss/exported/jms/queue/TaskManager" />
 				<durable>true</durable>
 			</jms-queue>
+			<jms-queue name="Log">
+				<entry name="queue/Log" />
+				<entry name="java:jboss/exported/jms/queue/Log" />
+				<durable>true</durable>
+			</jms-queue>
 		</jms-destinations>
 	</hornetq-server>
 </messaging-deployment>

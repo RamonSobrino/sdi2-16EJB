@@ -17,9 +17,6 @@ import javax.jms.ObjectMessage;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
-import org.jboss.dmr.JSONParser;
-
-import alb.util.console.Console;
 import uo.sdi.business.MessageResponderService;
 import uo.sdi.dto.Task;
 
@@ -31,6 +28,9 @@ public class EjbMessageResponderService implements MessageResponderService{
 
 	@Resource private SessionContext ctx;
 	private Destination destino;
+	
+	@Resource(mappedName = "java:/queue/Log")
+	private Destination queueLog;
 
 
 	private Connection con  ;
@@ -45,10 +45,17 @@ public class EjbMessageResponderService implements MessageResponderService{
 				Session.AUTO_ACKNOWLEDGE);
 		MessageProducer sender = session.createProducer(destino);
 
+				
+		MessageProducer logSender = session.createProducer(queueLog);
+		
+		logSender.send(msg);
+		
 		TextMessage mensaje = this.session.createTextMessage();
 		mensaje.setText("Un Error se ha producido "+ tipoError);
 
 		sender.send(mensaje);
+		sender.close();
+		close();
 	}
 
 	@Override
@@ -64,7 +71,8 @@ public class EjbMessageResponderService implements MessageResponderService{
 		mensaje.setText("Todo ha ido bien");
 
 		sender.send(mensaje);
-
+		sender.close();
+		close();
 	}
 
 	@Override
@@ -80,6 +88,14 @@ public class EjbMessageResponderService implements MessageResponderService{
 				this.session.createObjectMessage((Serializable)lista);
 	
 		sender.send(mensaje);
+		sender.close();
+		close();
+	}
+	
+	private void close() throws JMSException
+	{
+		this.session.close();
+		this.con.close();
 	}
 
 }
